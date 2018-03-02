@@ -29,7 +29,7 @@ class Content extends Component {
       <DescriptionContainer>
       <Heading>{this.state.cat}</Heading>
       {
-        data.map(link => <Link href={link.dat} key={link.dat} name={link.name}></Link>)
+        data.map(link => <Link href={link.dat} key={link.dat} name={link.name} update={link.updated}></Link>)
       }
       </DescriptionContainer>
 
