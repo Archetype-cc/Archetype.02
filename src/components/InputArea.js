@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Flex1 } from './Styles';
+const links = require('electron').remote.require('./lib/remote') // bar
 
 
 const InputLink = styled.input `
@@ -24,13 +25,18 @@ const ButtonSubmit = styled.button `
 `
 
 class InputArea extends Component {
+  newSite(){
 
+    // alert("DD");
+    // links.getData()
+
+  }
   render(){
 
     return (
       <div>
         <Flex1>
-        <InputLink type="text" placeholder="dat://....." />
+        <InputLink onClick={this.newSite} type="text" placeholder="dat://....." />
         </Flex1>
 
       </div>

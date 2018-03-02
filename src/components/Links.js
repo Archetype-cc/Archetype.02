@@ -46,6 +46,16 @@ class Link extends Component {
       update: this.props.update
     }
   }
+  componentWillReceiveProps(nextProps) {
+    console.log("props updated in content", nextProps);
+    this.setState({
+      href: nextProps.href,
+      keys: nextProps.key,
+      name: nextProps.name,
+      cat: nextProps.cat,
+      update: nextProps.update
+    })
+  }
   render() {
     const { update } = this.state;
 

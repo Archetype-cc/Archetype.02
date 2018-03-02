@@ -4,7 +4,7 @@ import Link from './Links';
 import Content from './Content';
 const {ipcRenderer} = require('electron')
 
-const links = require('electron').remote.require('./lib/remote') // bar
+const {links} = require('electron').remote.require('./lib/remote') // bar
 
 const Container = styled.div `
   flex : 1;
@@ -28,16 +28,23 @@ class Feed extends Component {
       data: links.getData()
     }
   }
-
+  new = () => {
+    this.setState({
+      data: links.getData()
+    }, function () {
+      console.log("updated feed state");
+      console.log(this.state.data.Design[0].updated);
+    });
+  }
   render() {
     const { data } = this.state;
 
     return (
-      <Container>
+      <Container onClick={this.new}>
 
       {
         Object.keys(data).map(cat => {
-          return <Content key={cat} category={cat} data={data[cat]}/>
+          return <Content key={cat} category={cat}  data={data[cat]}/>
         })
       }
 

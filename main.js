@@ -5,6 +5,7 @@ const {app, BrowserWindow, ipcMain, Tray} = require('electron');
 const path = require('path')
 const url = require('url')
 const { mkArchetypeDir  } = require('./lib/filesystem')
+const { links  } = require('./lib/remote')
 
 
 const assetsDirectory = path.join(__dirname, 'assets')
@@ -24,6 +25,7 @@ app.on('ready', () => {
   createTray()
   createWindow()
 })
+
 
 
 // Quit the app when the window is closed

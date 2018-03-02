@@ -22,12 +22,23 @@ class Content extends Component {
       data: this.props.data
     }
   }
+  componentWillReceiveProps(nextProps) {
+    console.log("props updated in content", nextProps);
+    this.setState({
+      cat: nextProps.category,
+      data: nextProps.data
+    })
+    // // You don't have to do this check first, but it can help prevent an unneeded render
+    // if (nextProps.startTime !== this.state.startTime) {
+    //   this.setState({ startTime: nextProps.startTime });
+    // }
+  }
   render() {
-    const { data } = this.state;
-    console.log(data);
+    const { data, cat } = this.state;
+    // console.log("hello", this.props.data);
     return (
       <DescriptionContainer>
-      <Heading>{this.state.cat}</Heading>
+      <Heading>{cat}</Heading>
       {
         data.map(link => <Link href={link.dat} key={link.dat} name={link.name} update={link.updated}></Link>)
       }
