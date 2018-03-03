@@ -48,21 +48,18 @@ class Menu extends Component {
     return (
       <div>
         <MenuContainer>
+          <Flex1 style={{textAlign: 'left', paddingLeft: '20px'}}>
+            <Refresh onClick={() => this.props.onRefresh()}> Sync
+              <Icon>
+              ~
+              </Icon>
+            </Refresh>
+          </Flex1>
 
-        <Flex1 style={{textAlign: 'left', paddingLeft: '20px'}}>
-
-          <Refresh onClick={() => this.props.onRefresh()}> Sync
-            <Icon>
-            ~
-            </Icon>
-          </Refresh>
-
-        </Flex1>
-        <Flex1 style={{textAlign: 'right', paddingRight: '20px'}}>
-          <TitleA> Archetype 02.</TitleA>
-        </Flex1>
+          <Flex1 style={{textAlign: 'right', paddingRight: '20px'}}>
+            <TitleA> Archetype 02.</TitleA>
+          </Flex1>
         </MenuContainer>
-
       </div>
     )
   }
