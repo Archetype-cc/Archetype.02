@@ -23,15 +23,11 @@ class Content extends Component {
     }
   }
   componentWillReceiveProps(nextProps) {
-    console.log("props updated in content", nextProps);
+    // console.log("props updated in content", nextProps);
     this.setState({
       cat: nextProps.category,
       data: nextProps.data
     })
-    // // You don't have to do this check first, but it can help prevent an unneeded render
-    // if (nextProps.startTime !== this.state.startTime) {
-    //   this.setState({ startTime: nextProps.startTime });
-    // }
   }
   render() {
     const { data, cat } = this.state;

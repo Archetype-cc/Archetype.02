@@ -21,4 +21,12 @@ const ThemeBox = styled.button `
 `;
 
 
-export { Flex1, ThemeBox };
+const Line = styled.div `
+  width: 100%;
+  height: 1px;
+  background: white;
+  margin: 50px 0 20px 0;
+  position: absolute;
+`
+
+export { Flex1, ThemeBox, Line };

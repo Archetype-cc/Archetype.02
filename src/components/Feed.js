@@ -28,19 +28,28 @@ class Feed extends Component {
       data: links.getData()
     }
   }
-  new = () => {
+
+  componentWillReceiveProps(nextProps) {
+    // console.log("props updated in content", nextProps);
     this.setState({
-      data: links.getData()
+      data: nextProps.data
+    })
+  }
+
+  callData = () => {
+    this.setState({
+      data: links.readData()
     }, function () {
       console.log("updated feed state");
       console.log(this.state.data.Design[0].updated);
     });
   }
+
   render() {
     const { data } = this.state;
 
     return (
-      <Container onClick={this.new}>
+    <Container onClick={this.callData}>
 
       {
         Object.keys(data).map(cat => {

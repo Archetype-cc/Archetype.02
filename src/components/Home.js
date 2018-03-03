@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Feed from './Feed';
 import InputArea from './InputArea';
+import { Line } from './Styles';
 
 import Menu from './Menu';
+const {links} = require('electron').remote.require('./lib/remote') // bar
 
 
 
@@ -17,26 +19,33 @@ const PageContainer = styled.div`
 
 
 class Home extends Component {
-  // constructor(props){
-  //   super(props);
-  //   this.state = {
-  //     data: {}
-  //   }
-  // }
-  //
-  // componentWillMount() {
-  //   read json filesystem
-  //   store it in memory
-  //   update data in state to data in file
-  // }
+  constructor(props){
+    super(props);
+    this.state = {
+      data: links.getData()
+    }
+  }
+
+  refresh = () => {
+    this.setState({
+      data: links.readData()
+    }, function () {
+      console.log("updated feed state");
+      console.log(this.state.data.Design[0].updated);
+    });
+  }
 
   render () {
+    const { data } = this.state;
+
 
     return (
       <div>
-        <Menu />
+        <Menu onRefresh={this.refresh} />
+        <Line />
+
         <PageContainer>
-          <Feed />
+          <Feed data={data} />
 
         </PageContainer>
         <InputArea />

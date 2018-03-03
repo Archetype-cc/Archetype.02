@@ -25,18 +25,16 @@ const ButtonSubmit = styled.button `
 `
 
 class InputArea extends Component {
-  newSite(){
-
-    // alert("DD");
-    // links.getData()
-
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();
   }
   render(){
 
     return (
       <div>
         <Flex1>
-        <InputLink onClick={this.newSite} type="text" placeholder="dat://....." />
+        <InputLink onClick={this.handleSubmit} type="text" placeholder="dat://....." />
         </Flex1>
 
       </div>
