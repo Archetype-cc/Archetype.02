@@ -22,17 +22,16 @@ class Home extends Component {
   constructor(props){
     super(props);
     this.state = {
-      data: links.getData()
+      data: links.readData().then(data => { this.setState({ data: JSON.parse(data) })})
     }
   }
 
   refresh = () => {
-    this.setState({
-      data: links.readData()
-    }, function () {
-      console.log("updated feed state");
-      console.log(this.state.data.Design[0].updated);
-    });
+    links.readData().then(data => {
+      this.setState({
+        data: JSON.parse(data)
+      })
+    })
   }
 
   render () {

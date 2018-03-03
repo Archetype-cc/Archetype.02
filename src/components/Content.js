@@ -31,12 +31,15 @@ class Content extends Component {
   }
   render() {
     const { data, cat } = this.state;
-    // console.log("hello", this.props.data);
+    console.log( data);
+
     return (
       <DescriptionContainer>
       <Heading>{cat}</Heading>
+
       {
-        data.map(link => <Link href={link.dat} key={link.dat} name={link.name} update={link.updated}></Link>)
+        Object.keys(data).map(link => <Link href={data[link].dat} key={data[link].dat} name={data[link].name} update={data[link].updated}></Link>)
+
       }
       </DescriptionContainer>
 

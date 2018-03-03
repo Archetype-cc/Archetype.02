@@ -25,7 +25,7 @@ class Feed extends Component {
   constructor(props){
     super(props);
     this.state = {
-      data: links.getData()
+      data: this.props.data
     }
   }
 
@@ -36,20 +36,12 @@ class Feed extends Component {
     })
   }
 
-  callData = () => {
-    this.setState({
-      data: links.readData()
-    }, function () {
-      console.log("updated feed state");
-      console.log(this.state.data.Design[0].updated);
-    });
-  }
 
   render() {
     const { data } = this.state;
 
     return (
-    <Container onClick={this.callData}>
+    <Container >
 
       {
         Object.keys(data).map(cat => {
