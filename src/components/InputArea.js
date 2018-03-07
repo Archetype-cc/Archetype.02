@@ -18,10 +18,18 @@ const InputLink = styled.input `
   letter-spacing: 1px;
 `
 const ButtonSubmit = styled.button `
-  width: 20vw;
-  background: red;
+  width: 100vw;
+  height: 40px;
+  background: #131713;
   position: fixed;
   bottom: 0;
+  border: none;
+  border-top: 1px solid white;
+  text-align: center;
+  color: #E58E73;
+  font-size: 20px;
+  cursor: pointer;
+
 `
 
 class InputArea extends Component {
@@ -34,7 +42,7 @@ class InputArea extends Component {
     return (
       <div>
         <Flex1>
-        <InputLink onClick={this.handleSubmit} type="text" placeholder="dat://....." />
+        <ButtonSubmit onClick={() => this.props.click()}> + </ButtonSubmit>
         </Flex1>
 
       </div>

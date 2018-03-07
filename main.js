@@ -6,6 +6,7 @@ const path = require('path')
 const url = require('url')
 const { mkArchetypeDir  } = require('./lib/filesystem')
 const { links  } = require('./lib/remote')
+const { loop, write  } = require('./lib/datStatus')
 
 
 const assetsDirectory = path.join(__dirname, 'assets')
@@ -22,11 +23,13 @@ if ( process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath) 
 
 app.on('ready', () => {
   mkArchetypeDir();
-  createTray()
-  createWindow()
+  createTray();
+  createWindow();
+  loop().then(write);
 })
 
 
+app.dock.setBadge('hi');
 
 // Quit the app when the window is closed
 app.on('window-all-closed', () => {

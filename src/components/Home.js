@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Feed from './Feed';
 import InputArea from './InputArea';
+import AddLink from './AddLink';
 import { Line } from './Styles';
 
 import Menu from './Menu';
 const {links} = require('electron').remote.require('./lib/remote') // bar
+const {loop, write} = require('electron').remote.require('./lib/datStatus') // bar
 
 
 
@@ -22,11 +24,13 @@ class Home extends Component {
   constructor(props){
     super(props);
     this.state = {
-      data: links.readData().then(data => { this.setState({ data: JSON.parse(data) })})
+      data: links.readData().then(data => { this.setState({ data: JSON.parse(data) })}),
+      createLink: false
     }
   }
 
   refresh = () => {
+    loop().then(write);
     links.readData().then(data => {
       this.setState({
         data: JSON.parse(data)
@@ -34,8 +38,22 @@ class Home extends Component {
     })
   }
 
+  create = () => {
+    this.setState({
+      createLink: true
+    })
+  }
+
+
+  remove = () => {
+    this.setState({
+      createLink: false
+    })
+
+  }
+
   render () {
-    const { data } = this.state;
+    const { data, createLink } = this.state;
 
 
     return (
@@ -47,7 +65,14 @@ class Home extends Component {
           <Feed data={data} />
 
         </PageContainer>
-        <InputArea />
+        <InputArea click={this.create} />
+        {
+          createLink
+          ?
+          <AddLink click={this.remove}/>
+          :
+          null
+        }
 
       </div>
     )
