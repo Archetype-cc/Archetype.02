@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Flex1 } from './Styles';
-const {links} = require('electron').remote.require('./lib/remote') // bar
+const {links} = require('electron').remote.require('./lib/remote') //
 
 const MenuContainer = styled.div `
   height: 50px;
