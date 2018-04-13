@@ -30,7 +30,12 @@ class Home extends Component {
   }
 
   componentDidMount(){
-    const data = links.readData().then(data => { this.setState({ data: JSON.parse(data) })})
+    const data = links.readData().then(data => {
+
+       this.setState({ data: JSON.parse(data) })
+
+
+     })
   }
 
   refresh = () => {
@@ -70,17 +75,27 @@ class Home extends Component {
 
   deleteLink = (cat, dat) => {
     const { data } = this.state;
-    const newData = data;
+    let newData = data;
     const index = data[cat].findIndex(element => element.dat === dat);
 
     if(index > -1){
       newData[cat].splice(index, 1);
       console.log('newdata', newData);
+
+
+     Object.keys(newData).forEach(category => {
+        if(newData[category].length === 0){
+          delete newData[category]
+        }
+      })
+
+      console.log(newData);
+
       this.setState({
         data: newData
       })
     }
-    
+
     links.writeData(this.state.data);
 
   }
