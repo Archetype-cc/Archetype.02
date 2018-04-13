@@ -24,9 +24,13 @@ class Home extends Component {
   constructor(props){
     super(props);
     this.state = {
-      data: links.readData().then(data => { this.setState({ data: JSON.parse(data) })}),
+      data: {},
       createLink: false
     }
+  }
+
+  componentDidMount(){
+    const data = links.readData().then(data => { this.setState({ data: JSON.parse(data) })})
   }
 
   refresh = () => {
@@ -44,6 +48,43 @@ class Home extends Component {
     })
   }
 
+  addLink = (newLink) => {
+    const { data } = this.state;
+    const { cat, dat, name } = newLink;
+
+    const newData = data;
+    const linkNew = { dat, name, updated: false, timestamp: null, version: null };
+    if(data[cat]){
+      data[cat].push(linkNew)
+    } else {
+      data[cat] = [linkNew]
+    }
+
+    this.setState({
+      createLink: false,
+      data: newData
+    })
+
+    links.writeData(this.state.data);
+  }
+
+  deleteLink = (cat, dat) => {
+    const { data } = this.state;
+    const newData = data;
+    const index = data[cat].findIndex(element => element.dat === dat);
+
+    if(index > -1){
+      newData[cat].splice(index, 1);
+      console.log('newdata', newData);
+      this.setState({
+        data: newData
+      })
+    }
+    
+    links.writeData(this.state.data);
+
+  }
+
 
   remove = () => {
     this.setState({
@@ -55,21 +96,21 @@ class Home extends Component {
   render () {
     const { data, createLink } = this.state;
 
-
+console.log(data);
     return (
       <div>
         <Menu onRefresh={this.refresh} />
         <Line />
 
         <PageContainer>
-          <Feed data={data} />
+          <Feed data={data} deleteLink={this.deleteLink}/>
 
         </PageContainer>
         <InputArea click={this.create} />
         {
           createLink
           ?
-          <AddLink click={this.remove}/>
+          <AddLink data={data} click={this.remove} addLink={this.addLink}/>
           :
           null
         }

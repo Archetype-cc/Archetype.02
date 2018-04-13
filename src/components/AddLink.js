@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import _ from 'lodash';
 import { Center } from './Styles';
 
 const AddContainer = styled.div `
@@ -67,20 +68,42 @@ const Cross = styled.button `
 
 
 class AddLink extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      dat: "",
+      name: "",
+      cat: ""
+    }
+  }
+
+  handleChange = (e, type) => {
+    this.setState({
+      [type]: _.capitalize(e.target.value)
+    });
+  }
+
+  handleUpdate = () => {
+    const { addLink } = this.props;
+    const { dat, name, cat } = this.state;
+
+    addLink({ dat, name, cat });
+  }
+
 
   render(){
+
+
+    const { dat, name, cat } = this.state;
 
     return (
 
       <AddContainer>
-        <InputBox type="text" placeholder="dat://"/>
-        <InputBox type="text" placeholder="Name"/>
-        <SelectBox name="text" placeholder="Select">
-          <option value="value1">Design</option>
-          <option value="value2" selected>Art</option>
-          <option value="value3">Music</option>
-        </SelectBox>
-        <SubmitBox type="submit" />
+        <InputBox type="text"  placeholder="dat://" onChange={(e) => this.handleChange(e, 'dat')}/>
+        <InputBox type="text" value={name} placeholder="Name" onChange={(e) => this.handleChange(e, 'name')}/>
+        <InputBox type="text" value={cat} placeholder="Category" onChange={(e) => this.handleChange(e, 'cat')}/>
+
+        <SubmitBox type="submit" onClick={this.handleUpdate} />
         <Center>
           <Cross onClick={() => this.props.click()}> X </Cross>
         </Center>

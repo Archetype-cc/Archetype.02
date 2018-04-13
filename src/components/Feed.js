@@ -45,7 +45,7 @@ class Feed extends Component {
 
       {
         Object.keys(data).map(cat => {
-          return <Content key={cat} category={cat}  data={data[cat]}/>
+          return <Content  category={cat}  data={data[cat]} deleteLink={this.props.deleteLink}/>
         })
       }
 

@@ -12,7 +12,7 @@ const DatLink = styled.a `
   font-size: 16px;
   line-height: 30px;
   text-decoration: none;
-  flex: 9;
+  flex: 5;
 
   &:visited {
     color: white
@@ -33,43 +33,37 @@ const Icon = styled.img `
   height: auto;
 `
 
+
 //TODO: Replace color fiil for variables
 
 class Link extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      href: this.props.href,
-      keys: this.props.key,
-      name: this.props.name,
-      cat: this.props.cat,
-      update: this.props.update
-    }
   }
-  componentWillReceiveProps(nextProps) {
-    // console.log("props updated in content", nextProps);
-    this.setState({
-      update: nextProps.update
-    })
-  }
-  render() {
-    const { update } = this.state;
+  // componentWillReceiveProps(nextProps) {
+  //   // console.log("props updated in content", nextProps);
+  //   this.setState({
+  //     update: nextProps.update
+  //   })
+  // }
 
+
+
+  render() {
+    const { update, dat, name, cat } = this.props;
     let pink = "#E58E73";
     let grey = 'grey';
-
-    // console.log(update);
 
     return (
 
       <LinkBox >
-        <DatLink href={this.state.href} key={this.state.keys}>{this.state.name}< /DatLink>
+        <DatLink href={dat} >{name}< /DatLink>
         <IconBox>
 
         {
           update
           ?
-          <a href={this.state.href} key={this.state.keys} >
+          <a href={dat}  >
             <svg width='35' height='9' viewBox='0 0 35 9' xmlns='http://www.w3.org/2000/svg'>
                 <g id='Page-1' fill='none' fillRule='evenodd'>
                     <g id='noun_88231_cc' fill={pink} fillRule='nonzero'>
@@ -80,7 +74,7 @@ class Link extends Component {
             </svg>
           </a>
           :
-          <a href={this.state.href} key={this.state.keys} >
+          <a href={dat}  >
             <svg width='35' height='9' viewBox='0 0 35 9' xmlns='http://www.w3.org/2000/svg'>
                 <g id='Page-1' fill={grey} fillRule='evenodd'>
                     <g id='noun_88231_cc-copy' fill='#A3A3A3' fillRule='nonzero'>
@@ -92,6 +86,7 @@ class Link extends Component {
           </a>
         }
 
+        <span onClick={() => this.props.deleteLink(cat, dat)}> • </span>
 
         </IconBox>
 

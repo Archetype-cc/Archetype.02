@@ -29,7 +29,7 @@ app.on('ready', () => {
 })
 
 
-app.dock.setBadge('hi');
+app.dock.hide();
 
 // Quit the app when the window is closed
 app.on('window-all-closed', () => {
@@ -38,7 +38,7 @@ app.on('window-all-closed', () => {
 
 
 const createTray = () => {
-  tray = new Tray(path.join(assetsDirectory, 'sunTemplate.png'))
+  tray = new Tray(path.join(assetsDirectory, 'archetype.png'))
   tray.on('right-click', toggleWindow)
   tray.on('double-click', toggleWindow)
   tray.on('click', function (event) {
