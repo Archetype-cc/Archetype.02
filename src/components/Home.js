@@ -31,10 +31,7 @@ class Home extends Component {
 
   componentDidMount(){
     const data = links.readData().then(data => {
-
        this.setState({ data: JSON.parse(data) })
-
-
      })
   }
 

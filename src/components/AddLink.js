@@ -103,7 +103,7 @@ class AddLink extends Component {
         <InputBox type="text" value={name} placeholder="Name" onChange={(e) => this.handleChange(e, 'name')}/>
         <InputBox type="text" value={cat} placeholder="Category" onChange={(e) => this.handleChange(e, 'cat')}/>
 
-        <SubmitBox type="submit" onClick={this.handleUpdate} />
+        <SubmitBox type="submit" value={'Add Link'} onClick={this.handleUpdate} /> 
         <Center>
           <Cross onClick={() => this.props.click()}> X </Cross>
         </Center>
