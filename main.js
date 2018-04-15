@@ -4,9 +4,9 @@
 const {app, BrowserWindow, ipcMain, Tray} = require('electron');
 const path = require('path')
 const url = require('url')
-const { mkArchetypeDir  } = require('./lib/filesystem')
+const { mkArchetypeDir, writeJson  } = require('./lib/filesystem')
 const { links  } = require('./lib/remote')
-const { loop, write  } = require('./lib/datStatus')
+// const { loop, write  } = require('./lib/datStatus')
 
 
 const assetsDirectory = path.join(__dirname, 'assets')
@@ -22,10 +22,9 @@ if ( process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath) 
 
 
 app.on('ready', () => {
-  mkArchetypeDir();
-  createTray();
-  createWindow();
-  loop().then(write);
+  mkArchetypeDir().then(writeJson()).then(createWindow()).then(createTray())
+  // createWindow();
+  // createTray();
 })
 
 
@@ -43,6 +42,8 @@ const createTray = () => {
   tray.on('double-click', toggleWindow)
   tray.on('click', function (event) {
     toggleWindow()
+    // loop().then(write);
+
 
     // Show devtools when command clicked
     if (window.isVisible() && process.defaultApp && event.metaKey) {

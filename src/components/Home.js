@@ -111,7 +111,7 @@ class Home extends Component {
 console.log(data);
     return (
       <div>
-        <Menu onRefresh={this.refresh} />
+        <Menu onLoad={this.refresh} />
         <Line />
 
         <PageContainer>
